@@ -10,8 +10,9 @@ import org.apache.hadoop.io.WritableComparator;
  */
 public class SortHot extends WritableComparator {
 
+	// 必须重写次方法 并设置为true
 	protected SortHot() {
-		super(Weather.class, true);
+		super(Weather.class, true); 
 	}
 
 	/**

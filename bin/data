@@ -1,10 +1,7 @@
-1949-10-01 14:21:02	34℃
-1949-10-01 14:01:02	36℃
-1950-01-01 11:21:02	32℃
-1950-10-01 12:01:02	37℃
-1951-12-02 12:01:02	23℃
-1950-10-02 12:01:02	41℃
-1950-10-03 12:01:02	27℃
-1951-07-01 12:01:02	45℃
-1951-07-02 12:01:02	46℃
-
+tom hello hadoop cat
+world hadoop hello hive
+cat tom hive
+mr hive hello
+hive cat hadoop world hello mr
+hadoop tom hive world
+hello tom world hive mr
