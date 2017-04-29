@@ -18,32 +18,83 @@
 
 <configuration>
 
-     <!-- 设置namenode的http通讯地址 -->
-    <property>
-        <name>dfs.namenode.http-address</name>
+  <property>
+        <name>dfs.nameservices</name>
+        <value>master</value>
+    </property>
+
+	 <property>
+        <name>dfs.ha.namenodes.master</name>
+        <value>nn1,nn2</value>
+    </property>
+
+	 <property>
+        <name>dfs.namenode.rpc-address.master.nn1</name>
+        <value>master:8020</value>
+    </property>
+
+	 <property>
+        <name>dfs.namenode.rpc-address.master.nn2</name>
+        <value>slave1:8020</value>
+    </property>
+
+	<property>
+        <name>dfs.namenode.http-address.master.nn1</name>
         <value>master:50070</value>
     </property>
 
-    <!-- 设置secondarynamenode的http通讯地址 -->
-    <property>
-        <name>dfs.namenode.secondary.http-address</name>
-        <value>slave1:50090</value>
+	 <property>
+        <name>dfs.namenode.http-address.master.nn2</name>
+        <value>slave1:50070</value>
     </property>
 
-    <!-- 设置namenode存放的路径 -->
+	 <property>
+        <name>dfs.namenode.shared.edits.dir</name>
+        <value>qjournal://slave1:8485;slave2:8485;slave3:8485/master</value>
+    </property>
+
+	<property>
+        <name>dfs.client.failover.proxy.provider.master</name>
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+    </property>
+
+	<property>
+        <name>dfs.ha.fencing.methods</name>
+        <value>sshfence</value>
+    </property>
+
+	<property>
+        <name>dfs.ha.fencing.ssh.private-key-files</name>
+        <value>/root/.ssh/id_dsa</value>
+    </property>
+
+	<property>
+        <name>dfs.journalnode.edits.dir</name>
+        <value>/home/leesf/program/hadoop/jn/data</value>
+    </property>
+
+	<property>
+        <name>dfs.ha.automatic-failover.enabled</name>
+        <value>true</value> 
+    </property>
+	
+	<!-- 设置namenode存放的路径 -->
     <property>
         <name>dfs.namenode.name.dir</name>
         <value>/home/leesf/program/hadoop/tmp/name</value>
-    </property>
+    </property> 
 
     <!-- 设置hdfs副本数量 -->
     <property>
         <name>dfs.replication</name>
         <value>3</value>
     </property>
+
     <!-- 设置datanode存放的路径 -->
     <property>
         <name>dfs.datanode.data.dir</name>
         <value>/home/leesf/program/hadoop/tmp/data</value>
     </property>
+
+
 </configuration>
