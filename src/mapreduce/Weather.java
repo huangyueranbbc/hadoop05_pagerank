@@ -1,4 +1,4 @@
-package com.hyr.mr;
+package mapreduce;
 
 import java.io.DataInput;
 import java.io.DataOutput;

@@ -1,4 +1,4 @@
-package com.hyr.mr;
+package mapreduce;
 
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Partitioner;

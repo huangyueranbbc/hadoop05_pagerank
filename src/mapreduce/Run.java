@@ -1,4 +1,4 @@
-package com.hyr.mr;
+package mapreduce;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ public class Run {
 	public static void main(String[] args) {
 		Configuration conf = new Configuration();
 		// conf.set("fs.default.name", "hdfs://slave1:8020");
-		conf.set("mapred.jar", "H:\\jar\\weather_lib.jar");
+		conf.set("mapred.jar", "H:\\jar\\wt.jar");
 
 		try {
 			FileSystem fs = FileSystem.get(conf);

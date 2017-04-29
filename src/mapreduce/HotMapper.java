@@ -1,4 +1,4 @@
-package com.hyr.mr;
+package mapreduce;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
