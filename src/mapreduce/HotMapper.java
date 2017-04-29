@@ -34,11 +34,11 @@ public class HotMapper extends Mapper<LongWritable, Text, Weather, Text> {
 
 				System.out.println(year + "===============" + hot);
 				// 输出
-				Weather keyPari = new Weather();
-				keyPari.setYear(year);
-				keyPari.setHot(Integer.parseInt(hot));
+				Weather weather = new Weather();
+				weather.setYear(year);
+				weather.setHot(Integer.parseInt(hot));
 
-				context.write(keyPari, value);
+				context.write(weather, value);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

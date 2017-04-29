@@ -12,18 +12,19 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class Run {
 	public static void main(String[] args) {
-		Configuration conf = new Configuration();
-		// conf.set("fs.default.name", "hdfs://slave1:8020");
-		conf.set("mapred.jar", "H:\\jar\\wt.jar");
 
 		try {
-			FileSystem fs = FileSystem.get(conf);
-			Job job = Job.getInstance();
+			Configuration conf = new Configuration();
+			// conf.set("fs.default.name", "hdfs://slave1:8020");
+			conf.set("mapred.jar", "H:\\jar\\wt.jar");
 
-			job.setJobName("hot");
+			FileSystem fs = FileSystem.get(conf);
+			Job job = Job.getInstance(conf); 
+
 			job.setMapperClass(HotMapper.class);
 			job.setReducerClass(HotReduce.class);
-			job.setMapOutputKeyClass(Weather.class);
+			
+			job.setMapOutputKeyClass(Weather.class); 
 			job.setMapOutputValueClass(Text.class);
 
 			job.setNumReduceTasks(3); // 设置Reduce任务个数
@@ -39,6 +40,7 @@ public class Run {
 			}
 
 			job.waitForCompletion(true); // 是否等待完成
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
