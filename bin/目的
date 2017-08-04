@@ -1,5 +1,24 @@
-目的：找到二度人脉 推荐好友
-思路：
-	1.找到所有的二度关系-------在同一个用户的好友列表里，两个好友两两之间，都是二度关系
-	2.拿到真正的二度关系(亲密度) 取出已知好友关系
-	3.用户名 升序：按照 亲密度 排序
+求pagerank值
+
+
+hadoop jar /root/pagerank_file/pagerank-hdeploy.jar com.talis.labs.pagerank.mapreduce.PageRank /user/castagna/src/test/resources/test.dat /user/castagna/result 30 0.00001
+
+
+
+
+
+
+
+
+
+
+  
+  hadoop fs -mkdir hdfs://localhost/user/castagna/src/
+  hadoop fs -mkdir hdfs://localhost/user/castagna/src/test
+  hadoop fs -mkdir hdfs://localhost/user/castagna/src/test/resources
+
+  hadoop fs -copyFromLocal src/test/resources/* hdfs://localhost/user/castagna/src/test/resources/
+  
+  hadoop fs -rmr hdfs://localhost/user/castagna/target/
+
+  mvn hadoop:pack; hadoop --config conf/hadoop-local.xml jar ./target/hadoop-deploy/pagerank-hdeploy.jar com.talis.labs.pagerank.mapreduce.PageRank ./src/test/resources/datasets/small/ ./target/output 30 0.00001

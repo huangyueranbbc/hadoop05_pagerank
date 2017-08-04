@@ -1,9 +1,8 @@
+/com/
 /core-site.xml
 /data
 /hdfs-site.xml
 /mapred-site.xml
-/mapreduce/
 /org/
 /yarn-site.xml
 /目的
-/com/
