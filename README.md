@@ -16,3 +16,12 @@
   hadoop fs -copyFromLocal src/test/resources/* hdfs://localhost/user/castagna/src/test/resources/  
   hadoop fs -rmr hdfs://localhost/user/castagna/target/  
   mvn hadoop:pack; hadoop --config conf/hadoop-local.xml jar ./target/hadoop-deploy/pagerank-hdeploy.jar com.talis.labs.pagerank.mapreduce.PageRank ./src/test/resources/datasets/small/ ./target/output 30 0.00001  
+  
+Find PageRank value
+Basic steps:
+1. check and format data to weight + go to self reference
+2. statistics page total
+3. initializes the default initial PR value of each page = 1 / count
+4. calculate / update the value of the PR value and the =dangling value of all hanging pages
+5. update the PR value of the page, PageRank = d* (PageRank) + d*dangling/count + (1-D) /count
+6. check whether the convergence, if convergence, then stop the cycle. Current_pagerank - previous_pagerank
