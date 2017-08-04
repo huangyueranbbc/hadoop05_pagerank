@@ -29,6 +29,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+/**
+ * @category 检查并格式数据,去重和去自引用
+ * @author huangyueran
+ *
+ */
 public class CheckingData extends Configured implements Tool {
 
 	public static final Log logger = LogFactory.getLog(CheckingData.class);
@@ -45,8 +50,8 @@ public class CheckingData extends Configured implements Tool {
 		Job job = new Job(getConf(), "CheckingData");
 		job.setJarByClass(getClass());
 
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		FileInputFormat.addInputPath(job, new Path(args[0])); // 输入测试数据集 的路径
+		FileOutputFormat.setOutputPath(job, new Path(args[1])); // 计算结果的输出路径
 
 		job.setMapperClass(CheckingDataMapper.class);
 		job.setReducerClass(CheckingDataReducer.class);

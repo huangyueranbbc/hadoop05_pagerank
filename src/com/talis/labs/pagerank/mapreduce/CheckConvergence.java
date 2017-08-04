@@ -30,6 +30,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+/**
+ * @category 检查收敛---current_pagerank - previous_pagerank
+ * @author huangyueran
+ *
+ */
 public class CheckConvergence extends Configured implements Tool {
 
 	public static final Log logger = LogFactory.getLog(CheckConvergence.class) ;

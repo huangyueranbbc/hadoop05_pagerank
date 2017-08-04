@@ -31,6 +31,7 @@ public class CountPagesReducer extends Reducer<Text, LongWritable, Text, LongWri
 			sum += value.get();
 		}
 		context.write(key, new LongWritable(sum));
+		// count	11
 	}
 
 }

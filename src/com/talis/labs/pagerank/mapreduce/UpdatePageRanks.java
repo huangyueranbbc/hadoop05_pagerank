@@ -27,6 +27,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+/**
+ * @category  更新PR值-----公式:pagerank = d*(pagerank) + d*dangling/count + (1-d)/count
+ * @author huangyueran
+ *
+ */
 public class UpdatePageRanks extends Configured implements Tool {
 
 	@Override
@@ -37,16 +42,16 @@ public class UpdatePageRanks extends Configured implements Tool {
 		}
 
 		Configuration conf = getConf();
-		conf.set("pagerank.count", args[2]);
-		conf.set("pagerank.dangling", args[3]); 
+		conf.set("pagerank.count", args[2]); 
+		conf.set("pagerank.dangling", args[3]);  // 阻尼系数
 
 		FileSystem.get(conf).delete (new Path(args[1]), true);
 
 		Job job = new Job(conf, "UpdatePageRanks");
 		job.setJarByClass(getClass());
-
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		
+		FileInputFormat.addInputPath(job, new Path(args[0]));  		// 目录previous-pageranks 
+		FileOutputFormat.setOutputPath(job, new Path(args[1])); // 目录current-pageranks
 
 		job.setMapperClass(UpdatePageRanksMapper.class);
 		job.setReducerClass(UpdatePageRanksReducer.class);

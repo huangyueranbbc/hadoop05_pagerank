@@ -26,11 +26,11 @@ public class UpdatePageRanksReducer extends Reducer<Text, Text, Text, Text> {
 
 	private long count;
 	private double dangling;
-	private double d = 0.85;
+	private double d = 0.85; //阻尼系数
 
 	@Override
 	public void setup(Context context) throws IOException, InterruptedException {
-		count = Long.parseLong(context.getConfiguration().get("pagerank.count"));
+		count = Long.parseLong(context.getConfiguration().get("pagerank.count")); // 网页总数
 		dangling = Double.parseDouble(context.getConfiguration().get("pagerank.dangling"));
 	}
 	
@@ -42,6 +42,7 @@ public class UpdatePageRanksReducer extends Reducer<Text, Text, Text, Text> {
 		
 		for (Text value : values) {
 			StringTokenizer st = new StringTokenizer(value.toString());
+			System.out.println("##########   UpdatePageRanksReducer:"+value.toString()+"   ##########");
 			if ("pages".equals(st.nextToken())) {
 				previous_pagerank = Double.parseDouble(st.nextToken());
 				while (st.hasMoreTokens()) {
@@ -51,7 +52,7 @@ public class UpdatePageRanksReducer extends Reducer<Text, Text, Text, Text> {
 				pagerank += Double.parseDouble(st.nextToken());
 			}
 		}
-		pagerank = d*(pagerank) + d*dangling/count + (1-d)/count;
+		pagerank = d*(pagerank) + d*dangling/count + (1-d)/count; // 根据公式更新PR值
 		context.write(key, new Text(pagerank + "\t" + previous_pagerank + "\t" + links.toString()));		
 	}
 

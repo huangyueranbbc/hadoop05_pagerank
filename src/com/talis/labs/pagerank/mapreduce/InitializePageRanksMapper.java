@@ -31,13 +31,13 @@ public class InitializePageRanksMapper extends Mapper<LongWritable, Text, Text, 
 	
 	@Override
 	protected void setup(Context context) throws IOException, InterruptedException {
-		long count = Long.parseLong(context.getConfiguration().get("pagerank.count"));
-		pagerank = 1.0 / count;
+		long count = Long.parseLong(context.getConfiguration().get("pagerank.count"));// 需要统计的网页总数
+		pagerank = 1.0 / count; // 默认初始时，每个网页的初始PR值 1.0/网页总数
 	}
 	
 	@Override
 	public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
-		StringTokenizer st = new StringTokenizer(value.toString());
+		StringTokenizer st = new StringTokenizer(value.toString()); // 读取每行数据 转为StringTokenizer对象
 		Text page = null;
 		StringBuffer sb = new StringBuffer();
 		boolean first = true;
@@ -46,8 +46,8 @@ public class InitializePageRanksMapper extends Mapper<LongWritable, Text, Text, 
 			String token = st.nextToken();
 			if (first) {
 				page = new Text(token);
-				sb.append(pagerank).append("\t"); // current pagerank
-				sb.append(pagerank).append("\t"); // previous pagerank
+				sb.append(pagerank).append("\t"); // current pagerank 当前PR值  				= 1.0 / count
+				sb.append(pagerank).append("\t"); // previous pagerank 之前计算的PR值	= 1.0 / count
 				first = false;
 			} else {
 				// to remove duplicated links and self-references

@@ -30,6 +30,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+/**
+ * @category wordcount--统计共有多少个网页。
+ * @author huangyueran
+ *
+ */
 public class CountPages extends Configured implements Tool {
 
 	public static final Log logger = LogFactory.getLog(CountPages.class) ;

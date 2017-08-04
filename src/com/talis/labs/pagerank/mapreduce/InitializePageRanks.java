@@ -27,6 +27,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+/**
+ * @category 初始化每个网页的初始PR值=1.0 / count
+ * @author huangyueran
+ *
+ */
 public class InitializePageRanks extends Configured implements Tool {
 
 	@Override
@@ -37,15 +42,15 @@ public class InitializePageRanks extends Configured implements Tool {
 		}
 
 		Configuration conf = getConf();
-		conf.set("pagerank.count", args[2]);
+		conf.set("pagerank.count", args[2]); // 统计的网页总数目 
 
-		FileSystem.get(conf).delete (new Path(args[1]), true);
+		FileSystem.get(conf).delete (new Path(args[1]), true); // 删除previous-pageranks目录
 
 		Job job = new Job(conf, "InitializePageRanks");
 		job.setJarByClass(getClass());
 
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		FileInputFormat.addInputPath(job, new Path(args[0])); // 设置数据输入目录 current-pageranks,也就是去重和去自引用后的数据源
+		FileOutputFormat.setOutputPath(job, new Path(args[1])); // 设置输出目录 previous-pageranks
 
 		job.setMapperClass(InitializePageRanksMapper.class);
 

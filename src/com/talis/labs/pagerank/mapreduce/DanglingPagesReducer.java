@@ -26,9 +26,23 @@ public class DanglingPagesReducer extends Reducer<Text, DoubleWritable, Text, Do
 
 	@Override
 	public void reduce(Text key, Iterable<DoubleWritable> values, Context context) throws IOException, InterruptedException {
+		//		1	0.09090909090909091	0.09090909090909091	2	
+		//		10	0.09090909090909091	0.09090909090909091	5	
+		//		11	0.09090909090909091	0.09090909090909091	
+		//		2	0.09090909090909091	0.09090909090909091	11	3	5	7	9	
+		//		3	0.09090909090909091	0.09090909090909091	6	
+		//		4	0.09090909090909091	0.09090909090909091	
+		//		5	0.09090909090909091	0.09090909090909091	1	11	2	3	
+		//		6	0.09090909090909091	0.09090909090909091	
+		//		7	0.09090909090909091	0.09090909090909091	
+		//		8	0.09090909090909091	0.09090909090909091	10	
+		//		9	0.09090909090909091	0.09090909090909091	
+
+		
 		double sum = 0 ;
+		
 		for (DoubleWritable value : values) {
-			sum += value.get() ;
+			sum += value.get() ; // 第一次计算时为0.09090909090909091*5。 也就是没有入链的PR值相加 计算所有悬挂网页的PR值之和
 		}
 		context.write(key, new DoubleWritable(sum)) ;
 	}

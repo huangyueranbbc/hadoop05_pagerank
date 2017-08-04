@@ -28,6 +28,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
+/**
+ * @category 计算所有悬挂网页的PR值之和=dangling值
+ * @author huangyueran
+ *
+ */
 public class DanglingPages extends Configured implements Tool {
 
 	@Override
@@ -42,8 +47,8 @@ public class DanglingPages extends Configured implements Tool {
 		Job job = new Job(getConf(), "DanglingPages");
 		job.setJarByClass(getClass());
 		
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		FileInputFormat.addInputPath(job, new Path(args[0])); 			//	/user/castagna/result/previous-pageranks
+		FileOutputFormat.setOutputPath(job, new Path(args[1])); 	// /user/castagna/result/dangling
 
 		job.setMapperClass(DanglingPagesMapper.class);
 		job.setCombinerClass(DanglingPagesReducer.class);

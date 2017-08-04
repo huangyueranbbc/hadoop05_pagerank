@@ -30,7 +30,7 @@ public class CheckConvergenceReducer extends Reducer<Text, DoubleWritable, Text,
 		for (DoubleWritable value : values) {
 			tolerance += value.get() ;
 		}
-		context.write(key, new DoubleWritable(tolerance)) ;
+		context.write(key, new DoubleWritable(tolerance)) ; // 输出	current_pagerank - previous_pagerank
 	}
 
 }

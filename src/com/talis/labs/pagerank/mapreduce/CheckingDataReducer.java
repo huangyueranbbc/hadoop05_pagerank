@@ -29,7 +29,7 @@ public class CheckingDataReducer extends Reducer<Text, Text, Text, Text> {
 	public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 		Set<String> links = new TreeSet<String>() ;
 		for (Text value : values) {
-			if (!value.equals(CheckingDataMapper.NONE)) {
+			if (!value.equals(CheckingDataMapper.NONE)) { // 如果不是悬挂的页面 才添加到入链集合中
 				links.add(value.toString()) ;
 			}			
 		}
@@ -38,6 +38,20 @@ public class CheckingDataReducer extends Reducer<Text, Text, Text, Text> {
 			sb.append(link).append("\t") ;
 		}
 		context.write(key, new Text(sb.toString())) ;
+		// 得到去重和去掉自己投给自己的票数的结果
+//		1	2	
+//		10	5	
+//		11	
+//		2	11	3	5	7	9	
+//		3	6	
+//		4	
+//		5	1	11	2	3	
+//		6	
+//		7	
+//		8	10	
+//		9	
+//		
+
 	}
 
 }
