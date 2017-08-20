@@ -40,7 +40,7 @@ public class PageRank extends Configured implements Tool {
 	public static final DecimalFormat formatter = new DecimalFormat("#.####################") ;
 
 	private static final int HTML_TABLE_ROWS = 200 ;
-	private static final boolean HTML_TABLE = true ;
+	private static final boolean HTML_TABLE = false ;
 	
 	@Override
 	public int run(String[] args) throws Exception {
