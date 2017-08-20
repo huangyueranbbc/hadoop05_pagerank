@@ -69,7 +69,7 @@ public class PageRank extends Configured implements Tool {
 		while ( i < Integer.parseInt(args[2]) ) { // 30
 			// 4. 计算/更新所有悬挂网页的PR值之和=dangling值
 			ToolRunner.run(getConf(), new DanglingPages(), new String[] { input, args[1] + File.separator + "dangling" } ) ; // 参1:/user/castagna/result/previous-pageranks  参2:/user/castagna/result/dangling
-			String dangling = read (fs, args[1] + File.separator + "dangling") ;  // 孤立网页 只有入读没有出度 可能是阻尼系数
+			String dangling = read (fs, args[1] + File.separator + "dangling") ;  // 孤立网页 只有入读没有出度
 			
 			// 5. 更新网页的PR值 pagerank = d*(pagerank) + d*dangling/count + (1-d)/count
 			ToolRunner.run(getConf(), new UpdatePageRanks(), new String[] { input, output, count, dangling } ) ; // 参1:previous-pageranks  参2:current-pageranks
