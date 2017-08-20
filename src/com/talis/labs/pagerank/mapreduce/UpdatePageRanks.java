@@ -43,7 +43,7 @@ public class UpdatePageRanks extends Configured implements Tool {
 
 		Configuration conf = getConf();
 		conf.set("pagerank.count", args[2]); 
-		conf.set("pagerank.dangling", args[3]);  // 阻尼系数
+		conf.set("pagerank.dangling", args[3]);
 
 		FileSystem.get(conf).delete (new Path(args[1]), true);
 
